@@ -17,8 +17,7 @@
 #define DISTANCE      2e25     //cm
 
 
-double get_dtau( double , double , double );
-//void find_phot( struct cell * , int , double , int * , double * );
+double get_dtau( double , double , double , double );
 
 double get_diff_dE( struct cell * , struct cell * , double , double );
 double get_tgam( struct cell * );
@@ -33,7 +32,7 @@ void fill_taus( struct cell * theCells, int N , double t ){
       struct cell * c = theCells+i;
       double dm = c->dm;
       double v  = c->v;
-      double dtau = get_dtau( dm , v , t );
+      double dtau = get_dtau( dm , v , t , c->kappa );
       tau += .5*dtau;
       c->tau = tau;
       tau += .5*dtau;

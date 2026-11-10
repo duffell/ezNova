@@ -7,6 +7,7 @@
 
 #define LIGHTSPEED 3e10 
 #define PROTON_MASS 1.67e-24
+#define OPACITY 0.1
 #define COMP_Z 1.0
 #define COMP_A 1.0
 
@@ -27,6 +28,11 @@ void timestep( struct domain * theDomain ){
    double dt = theDomain->dt;
 
    int i;
+//Compute Opacities
+   for( i=0; i<N ; ++i ){
+      theCells[i].kappa = OPACITY;
+   }
+
 //Nickel Decay
    for( i=0 ; i<N ; ++i ){
       double dm  = theCells[i].dm;

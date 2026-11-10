@@ -2,6 +2,7 @@
 #define NUM_ISOTOPES 8
 
 struct cell{
+
    double dm;
    double dv;
    double v;
@@ -10,6 +11,8 @@ struct cell{
    double tau;
    double XNi;
    double X[NUM_ISOTOPES];
+   double kappa;
+
 };
 
 struct domain{

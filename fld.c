@@ -8,15 +8,14 @@
 #define LIGHTSPEED 3e10
 #define PROTON_MASS 1.67e-24
    
-#define OPACITY 0.1
 #define COMP_A 1.0
 
 double get_rho( double , double , double );
 double get_temp( double , double );
 double get_Prad( double );
 
-double get_dtau( double dm, double v , double t ){
-   double k = OPACITY;
+double get_dtau( double dm, double v , double t , double kappa ){
+   double k = kappa;
    return( k*dm/4./M_PI/v/v/t/t );
 }
 
@@ -34,7 +33,7 @@ double get_diff_dE( struct cell * cL , struct cell * cR , double t , double dt )
    double eL = cL->eps;
    double TL = get_temp( nL , eL );
    double Pr_L = get_Prad( TL );
-   double dtauL = .5*get_dtau( dmL , vL , t );
+   double dtauL = .5*get_dtau( dmL , vL , t , cL->kappa );
 
    double dmR = cR->dm;
    double vR  = cR->v;
@@ -44,7 +43,7 @@ double get_diff_dE( struct cell * cL , struct cell * cR , double t , double dt )
    double eR = cR->eps;
    double TR = get_temp( nR , eR );
    double Pr_R = get_Prad( TR );
-   double dtauR = .5*get_dtau( dmR , vR , t );
+   double dtauR = .5*get_dtau( dmR , vR , t , cR->kappa );
 
    double dtau = dtauL+dtauR;
 
